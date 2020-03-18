@@ -1,134 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Tic tac Game</title>
   <style>
-    .row{
-      height: 90px;
-      vertical-align: middle
+    * {
+      box-sizing: border-box;
     }
 
-    .winner{
-      font-size:30px;
+    html {
+      height: 100%;
+    }
+
+    body {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .box {
+      display: flex;
+      width: 300px;
+      height: 300px;
+      flex-wrap: wrap;
+    }
+
+    .box_item {
+      border: 1px solid black;
+      height: 100px;
+      width: 100px;
+      font-size: 50px;
       text-align: center;
     }
-    .winner-button{
-      border: 5px solid black;
-      margin : 0 auto;
-      display: block;
-      height: 60px;
-      width: 100px;
-      font-size: 15px;
+
+    .player_text {
+      margin: 20px;
+      color: darkgrey;
+      font-size: x-large;
+    }
+    .winner_text{
+      margin: 20px;
+      color: green;
+      font-size: x-large;
     }
   </style>
 </head>
+
 <body>
-  <script>
-
-class Game {
-  constructor(player1,player2) {
-    this.player1 = player1
-    this.player2 = player2
-    this.squares = Array(9).fill(null);
-  }
-  fillsquare(index,character) {
-    this.squares[index] = character;
-    document.getElementById(index).innerHTML = character
-  }
-  renderSquare(index) {
-    return `<div id=${index} style = "display: inline-block; height: 90px; width: 90px; border: 1px solid black; vertical-align: top; font-size: 20px" ></div>`
-  }
-  renderBoard(){
-    return `
-    <div id="board" style="text-align: center;">
-    <div class="row">
-    ${this.renderSquare(0)}
-    ${this.renderSquare(1)}
-    ${this.renderSquare(2)}
-    </div>
-    <div class="row">
-    ${this.renderSquare(3)}
-    ${this.renderSquare(4)}
-    ${this.renderSquare(5)}
-    </div>
-    <div class="row">
-    ${this.renderSquare(6)}
-    ${this.renderSquare(7)}
-    ${this.renderSquare(8)}
-    </div>
-    </div>
-    <div class="active" style="text-align: center; font-size: 30px; margin : 20px">Current Player: ${this.player1.isActive? "X": "O"} </div>
-    `
-  }
-  renderActive(){
-    return `Current Player: ${this.player1.isActive? "X": "O"}`
-  }
-  changeCurrentPlayer(){
-    this.player1.toggleActive()
-    this.player2.toggleActive()
-    document.getElementsByClassName("active")[0].innerText = this.renderActive()
-  }
-}
-
-class Player {
-  constructor(character) {
-    this.character = character;  
-    this.isActive = false  
-  }
-
-  toggleActive(){
-    this.isActive = !this.isActive
-  }
-
-}
-
-var player1 = new Player('X')
-var player2 = new Player('O')
-player1.toggleActive()
-var game = new Game(player1, player2)
-document.body.innerHTML = game.renderBoard()
-
-const board = document.getElementById("board")
-board.addEventListener("click", function(e){
-  if(!e.target.innerText){
-    game.fillsquare(e.target.id, player1.isActive ? player1.character : player2.character);
-  game.changeCurrentPlayer();
-  var winner = checkWinner(player1.isActive ? player2 : player1)
-  if(winner) {
-    document.body.innerHTML = `<div class="winner">Winner is ${winner.character} <button onclick="(()=>{location.reload()})()" class="winner-button">Restart</button></div> `
-  }
-  }
-})
-
-function checkWinner(activePlayer){
-  var winCombination = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]
-  ]
-  var result = null
-  winCombination.forEach(winArray=>{
-    const [a,b,c] = winArray
-    if(
-      game.squares[a] === activePlayer.character && 
-      game.squares[b] === activePlayer.character &&
-      game.squares[c] === activePlayer.character
-    ){
-      result =  activePlayer;
-    }
-  })
-  return result;
-}
-
-
-  </script>
+  <div class="box">
+    <div class="box_item" id="id-0"></div>
+    <div class="box_item" id="id-1"></div>
+    <div class="box_item" id="id-2"></div>
+    <div class="box_item" id="id-3"></div>
+    <div class="box_item" id="id-4"></div>
+    <div class="box_item" id="id-5"></div>
+    <div class="box_item" id="id-6"></div>
+    <div class="box_item" id="id-7"></div>
+    <div class="box_item" id="id-8"></div>
+  </div>
+  <!-- <div class="player_text">Player 1 turn</div> -->
+  <div class="winner_text"></div>
+  <script src="withRedux.js"></script>
 </body>
+
 </html>

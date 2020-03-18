@@ -28,8 +28,8 @@ class Player {
 }
 
 const squares = Array(9).fill(null);
-const player1 = new Player('Ashish', 'x');
-const player2 = new Player('Kabita', 'o');
+const player1 = new Player('Ashish Kumar', 'x');
+const player2 = new Player('Kiran Priyadarshini', 'o');
 const activePlayer = player1;
 const winner = null;
 
